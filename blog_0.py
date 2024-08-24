@@ -8,7 +8,7 @@ app.config['SECRET_KEY'] = '123abc'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
-
+from models import User, Post
 # dummy data
 posts = [
     {
