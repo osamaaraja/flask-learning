@@ -1,5 +1,7 @@
 from blog_0 import db
 from datetime import datetime
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
