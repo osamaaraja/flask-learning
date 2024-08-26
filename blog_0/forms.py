@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-
+from blog_0.models import User
 
 # creating a registration form
 class RegistrationForm(FlaskForm):
@@ -12,8 +12,9 @@ class RegistrationForm(FlaskForm):
 
     submit = SubmitField('Sign Up')
 
-    def validate_field(self, field):
-        if True:
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
             raise ValidationError('Validation Message')
 
 
