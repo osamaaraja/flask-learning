@@ -59,3 +59,8 @@ def login():
         else:
             flash(f"Invalid Login or Password", "danger")
     return render_template('login.html', title='Log In', form=form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
