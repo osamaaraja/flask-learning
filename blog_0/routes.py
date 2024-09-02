@@ -70,3 +70,8 @@ def logout():
 @login_required
 def account():
     return render_template('account.html', title='Account')
+
+@app.route("/post/new")
+@login_required
+def new_post():
+    return render_template('create_post.html', title='New Post')
