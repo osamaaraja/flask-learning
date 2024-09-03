@@ -1,6 +1,6 @@
 from blog_0.models import User, Post
 from flask import render_template, flash, redirect, url_for, request
-from blog_0.forms import LoginForm, RegistrationForm
+from blog_0.forms import LoginForm, RegistrationForm, PostForm
 from blog_0 import app, db, bcrypt
 from flask_login import login_user, logout_user, current_user, login_required
 # dummy data
@@ -71,7 +71,12 @@ def logout():
 def account():
     return render_template('account.html', title='Account')
 
-@app.route("/post/new")
+@app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
-    return render_template('create_post.html', title='New Post')
+    form = PostForm()
+    if form.validate_on_submit():
+        flash("New Post has been created!", "success")
+        return redirect(url_for('home'))
+    return render_template('create_post.html', title='New Post', form=form)
+
