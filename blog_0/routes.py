@@ -4,6 +4,7 @@ from blog_0.forms import LoginForm, RegistrationForm, PostForm
 from blog_0 import app, db, bcrypt
 from flask_login import login_user, logout_user, current_user, login_required
 # dummy data
+'''
 posts = [
     {
         'author': 'RajaNova',
@@ -19,11 +20,11 @@ posts = [
         'date_posted': 'August 27,2024'
     }
 ]
-
+'''
 @app.route("/")
 @app.route("/home")
 def home():
-
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 @app.route("/about")
