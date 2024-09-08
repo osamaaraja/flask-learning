@@ -96,4 +96,5 @@ def update_post(post_id):
     if post.author != current_user:
         abort(403)
     form = PostForm()
+    form.title.data = post.title
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
