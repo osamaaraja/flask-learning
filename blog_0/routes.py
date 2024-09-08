@@ -82,7 +82,7 @@ def new_post():
         db.session.commit()
         flash("New Post has been created!", "success")
         return redirect(url_for('home'))
-    return render_template('create_post.html', title='New Post', form=form)
+    return render_template('create_post.html', title='New Post', form=form,  legend='New Post')
 
 @app.route("/post/<int:post_id>")
 def post(post_id):
@@ -96,4 +96,4 @@ def update_post(post_id):
     if post.author != current_user:
         abort(403)
     form = PostForm()
-    return render_template('create_post.html', title='Update Post', form=form)
+    return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
