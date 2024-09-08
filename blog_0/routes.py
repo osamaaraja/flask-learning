@@ -1,5 +1,5 @@
 from blog_0.models import User, Post
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, abort
 from blog_0.forms import LoginForm, RegistrationForm, PostForm
 from blog_0 import app, db, bcrypt
 from flask_login import login_user, logout_user, current_user, login_required
@@ -88,3 +88,12 @@ def new_post():
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
+
+@app.route("/post/<int:post_id>/update")
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    return render_template('create_post.html', title='Update Post', form=form)
