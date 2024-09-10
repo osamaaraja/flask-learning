@@ -24,7 +24,7 @@ posts = [
 @app.route("/")
 @app.route("/home")
 def home():
-    posts = Post.query.all()
+    posts = Post.query.paginate(per_page=5)
     return render_template('home.html', posts=posts)
 
 @app.route("/about")
