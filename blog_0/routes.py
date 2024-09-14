@@ -1,6 +1,6 @@
 from blog_0.models import User, Post
 from flask import render_template, flash, redirect, url_for, request, abort
-from blog_0.forms import LoginForm, RegistrationForm, PostForm
+from blog_0.forms import LoginForm, RegistrationForm, PostForm, RequestResetForm, ResetPasswordForm
 from blog_0 import app, db, bcrypt
 from flask_login import login_user, logout_user, current_user, login_required
 # dummy data
