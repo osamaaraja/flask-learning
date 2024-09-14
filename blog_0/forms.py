@@ -37,7 +37,7 @@ class PostForm(FlaskForm):
 
     submit = SubmitField('Post')
 
-class ResetResetForm(FlaskForm):
+class RequestResetForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
 
