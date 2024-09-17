@@ -15,5 +15,6 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
 
 from blog_0 import routes
