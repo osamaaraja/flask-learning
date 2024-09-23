@@ -1,3 +1,7 @@
+import os
+import secrets
+from tkinter import Image
+
 from blog_0.models import User, Post
 from flask import render_template, flash, redirect, url_for, request, abort
 from blog_0.forms import LoginForm, RegistrationForm, PostForm, RequestResetForm, ResetPasswordForm
@@ -33,7 +37,6 @@ def home():
 def about():
 
     return render_template('about.html', title='About')
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -64,10 +67,23 @@ def login():
             flash(f"Invalid Login or Password", "danger")
     return render_template('login.html', title='Log In', form=form)
 
+
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+def save_picture(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    output_size = (125,125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_path
 
 @app.route("/account")
 @login_required
